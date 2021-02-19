@@ -2,19 +2,19 @@
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
-
-
+const studentListUl = document.querySelector('.student-list');
+const linkList = document.querySelector('.link-list');
+const numOfPage = 9;
 /*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
 function showPage( list, page ) {
-   const startIndex = (page * 9) - 9;
-   const endIndex = page * 9;
-   const studentListUl = document.querySelector('.student-list');
+   const startIndex = (page * numOfPage) - numOfPage;
+   const endIndex = page * numOfPage;
+
    studentListUl.innerHTML = '';
 
-   // if the index is greater or same as the starting indexc and less than the endindex
    for (let i = 0; i < list.length; i++) {
       if (i >= startIndex && i < endIndex) {
          console.log(startIndex, endIndex);
@@ -28,11 +28,40 @@ function showPage( list, page ) {
             <div class="joined-details">
                <span class="date">Joined ${list[i].registered.date}</span>
             </div>
-         </li>`
+         </li>`;
          // insert elements to the studentListUl
          studentListUl.insertAdjacentHTML("beforeend", studentData);
+         
       }
    }
+}
+
+function addPagination( list ) {
+   const numOfPagination = list.length / numOfPage ;
+
+   linkList.innerHTML = '';
+   
+   for(let i = 1; i <= numOfPagination; i++) {
+      const linkListButtons = `
+      <li>
+         <button type="button">${i}</button>
+      </li>
+      `;
+      linkList.insertAdjacentHTML('beforeend', linkListButtons )
+   }
+   linkList.querySelector('button').className = 'active';
+
+   linkList.addEventListener('click', (e) => {
+      
+      if (e.target.tagName === 'BUTTON') {
+         document.querySelector('.active').className = '';
+         e.target.className = 'active';
+         showPage(list, e.target.textContent)
+         } 
+      
+         
+      }
+    )
 }
 
 
@@ -44,4 +73,5 @@ This function will create and insert/append the elements needed for the paginati
 
 
 // Call functions
-showPage(data, 2);
+showPage(data, 1);
+addPagination(data);
