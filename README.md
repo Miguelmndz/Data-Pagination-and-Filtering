@@ -7,3 +7,5 @@
  <p><strong>Purpose:</strong> Apply knowledge array list objects, DOM Manipulation </p>
  
  <p><strong>Skills Used:</strong> JavaScript </p>
+
+ <a href="https://miguelmndz.github.io/Data-Pagination-and-Filtering/">Demo</a>
